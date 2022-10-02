@@ -1,4 +1,4 @@
-class task_board:
+class TaskBoard:
     def __init__(self):
         self.solved = [] # Решены
         self.basic = [] # Базовые
@@ -27,8 +27,17 @@ class task_board:
     def get_list_finalize(self):
         print('Try again: ', self.finalize)
 
+    def delete_finalize(self, name):
+        self.finalize.remove(name)
 
-task = task_board()
+    def delete_basic(self, name):
+        self.basic.remove(name)
+
+    def delete_solved(self, name):
+        self.solved.remove(name)
+
+
+task = TaskBoard()
 task.add_basic('Почистить зубы')
 task.add_basic('Сделать зарядку')
 task.add_basic('Покушать')
@@ -42,4 +51,8 @@ task.go_finalize('Почистить зубы')
 task.get_list_basic()
 task.get_list_solved()
 task.get_list_finalize()
-
+print()
+task.delete_basic('Сделать зарядку')
+task.get_list_basic()
+task.get_list_solved()
+task.get_list_finalize()

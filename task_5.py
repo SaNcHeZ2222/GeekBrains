@@ -1,4 +1,4 @@
-class create_pile_plate:
+class CreatePilePlate:
     def __init__(self, max_len):
         self.pile = [[]]
         self.number = 0
@@ -22,9 +22,23 @@ class create_pile_plate:
                 self.number += 1
         print(self.pile)
 
+    def delete_pile(self, count):
+        index = len(self.pile) - 1
+        while True:
+            try:
+                self.pile[index].pop()
+                count -= 1
+            except Exception as e:
+                del self.pile[index]
+                index -= 1
+            if count == 0:
+                return
 
-pile = create_pile_plate(4)
+
+pile = CreatePilePlate(4)
 pile.add_plate(3)
 pile.add_plate_in_new_list(5)
 pile.add_plate(3)
 pile.add_plate_in_new_list(5)
+pile.delete_pile(6)
+print(pile.pile)
