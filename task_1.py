@@ -1,31 +1,37 @@
-def calculator():
-    symbol = input('Введите операцию (+, -, *, / или 0 для выхода): ')
-    if symbol == '0':
-        return
-    elif symbol not in '+-*/':
-        print('Проблема, попробуй ещё раз ввести символ')
-        return calculator()
-    number_1, number_2 = input('Введите два числа через пробел: ').split()
-    if not number_1.isdigit() or not number_2.isdigit():
-        print('Введите число, а не строку')
-        return calculator()
-    number_1 = int(number_1)
-    number_2 = int(number_2)
-    if symbol == '+':
-        print(number_1 + number_2)
-        return calculator()
-    elif symbol == '*':
-        print(number_1 * number_2)
-        return calculator()
-    elif symbol == '-':
-        print(number_1 - number_2)
-        return calculator()
-    elif symbol == '/':
-        if number_2 == 0:
-            print('Делить на ноль нельзя')
-            return calculator()
-        print(number_1 / number_2)
-        return calculator()
+"""
+Задание 1.
+Приведен код, который позволяет сохранить в
+массиве индексы четных элементов другого массива
+Сделайте замеры времени выполнения кода с помощью модуля timeit
+Попробуйте оптимизировать код, чтобы снизить время выполнения
+Проведите повторные замеры
+ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
+"""
+from timeit import timeit
 
 
-calculator()
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+func_1([1, 2, 3, 4])
+
+
+print(timeit('func_1', '[1, 2, 3, 4]', globals=globals()))
+# 0.021506666
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+print(timeit('func_2', '[1, 2, 3, 4]', globals=globals()))
+# 0.019326124999999993
+
+
+func_2([1, 2, 3, 4])
