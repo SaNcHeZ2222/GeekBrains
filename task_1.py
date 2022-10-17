@@ -1,31 +1,36 @@
-def calculator():
-    symbol = input('Введите операцию (+, -, *, / или 0 для выхода): ')
-    if symbol == '0':
-        return
-    elif symbol not in '+-*/':
-        print('Проблема, попробуй ещё раз ввести символ')
-        return calculator()
-    number_1, number_2 = input('Введите два числа через пробел: ').split()
-    if not number_1.isdigit() or not number_2.isdigit():
-        print('Введите число, а не строку')
-        return calculator()
-    number_1 = int(number_1)
-    number_2 = int(number_2)
-    if symbol == '+':
-        print(number_1 + number_2)
-        return calculator()
-    elif symbol == '*':
-        print(number_1 * number_2)
-        return calculator()
-    elif symbol == '-':
-        print(number_1 - number_2)
-        return calculator()
-    elif symbol == '/':
-        if number_2 == 0:
-            print('Делить на ноль нельзя')
-            return calculator()
-        print(number_1 / number_2)
-        return calculator()
+from collections import defaultdict
+
+count_comp = int(input('Введите количество компаний: '))
+
+dict_a = defaultdict(list)
+
+al_prib = 0
+
+for i in range(count_comp):
+    name = input('Введите название предприятия: ')
+    prices = input('Через пробел введите прибыль за каждый квартал (всего 4): ').split()
+    for price in prices:
+        dict_a[name].append(int(price))
+        al_prib += int(price)
+
+sr_year = al_prib / 2
+
+print(dict_a)
+
+print(sr_year)
+for i in dict_a:
+    if sr_year < sum(dict_a[i]):
+        print(f'Компания {i} выше среднего')
+    else:
+        print(f'Компания {i} ниже среднего')
 
 
-calculator()
+# Введите количество компаний: 2
+# Введите название предприятия: Рога
+# Через пробел введите прибыль за каждый квартал (всего 4): 235 345634 55 235
+# Введите название предприятия: Копыта
+# Через пробел введите прибыль за каждый квартал (всего 4): 345 34 543 34
+# defaultdict(<class 'list'>, {'Рога': [235, 345634, 55, 235], 'Копыта': [345, 34, 543, 34]})
+# 173557.5
+# Компания Рога выше среднего
+# Компания Копыта ниже среднего
